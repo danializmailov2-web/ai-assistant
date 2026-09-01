@@ -1,0 +1,15 @@
+workflows:
+  android-workflow:
+    name: Android Workflow
+    max_build_duration: 60
+    environment:
+      vars:
+        PACKAGE_NAME: "ru.assistant.ai"
+      android_sdk: 33
+    scripts:
+      - name: Build Android
+        script: |
+          cd app
+          ./gradlew assembleDebug
+    artifacts:
+      - app/build/outputs/apk/debug/*.apk

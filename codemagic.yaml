@@ -5,10 +5,14 @@ workflows:
     environment:
       vars:
         PACKAGE_NAME: "ru.assistant.ai"
+      android_sdk: 33
     scripts:
       - name: Build Android
         script: |
-          chmod +x gradlew
-          ./gradlew assembleDebug
+          # Устанавливаем правильный Gradle через SDK Manager
+          sdkmanager "build-tools;33.0.0"
+          # Собираем проект через встроенный gradle
+          cd app
+          gradle assembleDebug
     artifacts:
       - app/build/outputs/apk/debug/*.apk
